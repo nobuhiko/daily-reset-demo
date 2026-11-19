@@ -1,0 +1,23 @@
+// WordPress のデモ。Worker が前に立ち、1 つしかないコンテナに渡す。毎日 4:00(日本時間)に作り直す
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "wordpress-daily-reset-demo",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  // 独自ドメインで出すときは、次の行を足す(docker/wp-config.php の $demo_hosts にも同じ名前を足す)
+  // "routes": [{ "pattern": "demo.example.com", "custom_domain": true }],
+  "containers": [
+    {
+      "class_name": "Site",
+      "image": "./Dockerfile",
+      // 1/4 vCPU・1 GiB
+      "instance_type": "basic",
+      // サイトは 1 つ。デプロイの入れ替えで、古いほうと新しいほうが重なるので 2
+      "max_instances": 2
+    }
+  ],
+  "durable_objects": { "bindings": [{ "name": "SITE", "class_name": "Site" }] },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Site"] }],
+  // 毎日 4:00(日本時間)= 19:00 UTC
+  "triggers": { "crons": ["0 19 * * *"] }
+}
