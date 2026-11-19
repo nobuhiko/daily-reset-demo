@@ -58,7 +58,7 @@ cron が動き始めるまで、デプロイから 10 分ほどかかりまし�
 - https で来たことを伝える(`src/index.ts`)。コンテナには http で届くので、伝えないとリダイレクトの先が http になる
 - `max_instances` は 2。デプロイでイメージを入れ替えるあいだ、古いほうと新しいほうが重なる
 
-経緯と費用は Zenn の記事に書きました: [毎朝リセットされるデモサイトを Cloudflare Containers で作る](https://zenn.dev/nobuhiko/articles/cloudflare-containers-eccube-wordpress-demo)
+経緯と費用は Zenn の記事に書きました: [毎朝リセットされる EC-CUBEとWordPress のデモサイトを Cloudflare Containers で作る](https://zenn.dev/nobuhiko/articles/cloudflare-containers-eccube-wordpress-demo)
 
 ## ライセンス
 
